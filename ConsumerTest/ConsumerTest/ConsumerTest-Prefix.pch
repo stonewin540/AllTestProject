@@ -1,0 +1,18 @@
+//
+// Prefix header for all source files of the 'ConsumerTest' target in the 'ConsumerTest' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#ifndef MCSEC_PER_SEC
+#define MCSEC_PER_SEC   1000000
+#endif
