@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		8EAF2C1818091F0000D6D7C2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EAF2C1718091F0000D6D7C2 /* Cocoa.framework */; };
 		8EAF2C2218091F0000D6D7C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EAF2C2018091F0000D6D7C2 /* InfoPlist.strings */; };
+		8EAF2C2B18092A4B00D6D7C2 /* DBPluginDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF2C2A18092A4B00D6D7C2 /* DBPluginDemo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8EAF2C1418091F0000D6D7C2 /* DemoBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EAF2C1418091F0000D6D7C2 /* DemoBundle.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoBundle.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAF2C1718091F0000D6D7C2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8EAF2C1A18091F0000D6D7C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8EAF2C1B18091F0000D6D7C2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -20,6 +21,8 @@
 		8EAF2C1F18091F0000D6D7C2 /* DemoBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoBundle-Info.plist"; sourceTree = "<group>"; };
 		8EAF2C2118091F0000D6D7C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EAF2C2318091F0000D6D7C2 /* DemoBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DemoBundle-Prefix.pch"; sourceTree = "<group>"; };
+		8EAF2C2918092A4B00D6D7C2 /* DBPluginDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPluginDemo.h; sourceTree = "<group>"; };
+		8EAF2C2A18092A4B00D6D7C2 /* DBPluginDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPluginDemo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +49,7 @@
 		8EAF2C1518091F0000D6D7C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8EAF2C1418091F0000D6D7C2 /* DemoBundle.bundle */,
+				8EAF2C1418091F0000D6D7C2 /* DemoBundle.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +76,8 @@
 		8EAF2C1D18091F0000D6D7C2 /* DemoBundle */ = {
 			isa = PBXGroup;
 			children = (
+				8EAF2C2918092A4B00D6D7C2 /* DBPluginDemo.h */,
+				8EAF2C2A18092A4B00D6D7C2 /* DBPluginDemo.m */,
 				8EAF2C1E18091F0000D6D7C2 /* Supporting Files */,
 			);
 			path = DemoBundle;
@@ -105,7 +110,7 @@
 			);
 			name = DemoBundle;
 			productName = DemoBundle;
-			productReference = 8EAF2C1418091F0000D6D7C2 /* DemoBundle.bundle */;
+			productReference = 8EAF2C1418091F0000D6D7C2 /* DemoBundle.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -150,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EAF2C2B18092A4B00D6D7C2 /* DBPluginDemo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,12 +245,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "${HOME}";
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoBundle/DemoBundle-Prefix.pch";
 				INFOPLIST_FILE = "DemoBundle/DemoBundle-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
 		};
@@ -252,12 +261,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "${HOME}";
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoBundle/DemoBundle-Prefix.pch";
 				INFOPLIST_FILE = "DemoBundle/DemoBundle-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;
 		};
@@ -280,6 +292,7 @@
 				8EAF2C2818091F0000D6D7C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
