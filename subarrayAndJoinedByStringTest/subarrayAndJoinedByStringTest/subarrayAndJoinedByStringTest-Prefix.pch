@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'subarrayAndJoinedByStringTest' target in the 'subarrayAndJoinedByStringTest' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

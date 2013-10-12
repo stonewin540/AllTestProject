@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E15A2E01517293300097401 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E15A2DF1517293300097401 /* UIKit.framework */; };
+		8E15A2E21517293300097401 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E15A2E11517293300097401 /* Foundation.framework */; };
+		8E15A2E41517293300097401 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E15A2E31517293300097401 /* CoreGraphics.framework */; };
+		8E15A2EA1517293300097401 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E15A2E81517293300097401 /* InfoPlist.strings */; };
+		8E15A2EC1517293300097401 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E15A2EB1517293300097401 /* main.m */; };
+		8E15A2F01517293300097401 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E15A2EF1517293300097401 /* AppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8E15A2DB1517293200097401 /* ForDifferentIOSVersion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForDifferentIOSVersion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E15A2DF1517293300097401 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E15A2E11517293300097401 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E15A2E31517293300097401 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8E15A2E71517293300097401 /* ForDifferentIOSVersion-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ForDifferentIOSVersion-Info.plist"; sourceTree = "<group>"; };
+		8E15A2E91517293300097401 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E15A2EB1517293300097401 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8E15A2ED1517293300097401 /* ForDifferentIOSVersion-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForDifferentIOSVersion-Prefix.pch"; sourceTree = "<group>"; };
+		8E15A2EE1517293300097401 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8E15A2EF1517293300097401 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E15A2D81517293200097401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E15A2E01517293300097401 /* UIKit.framework in Frameworks */,
+				8E15A2E21517293300097401 /* Foundation.framework in Frameworks */,
+				8E15A2E41517293300097401 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E15A2D01517293200097401 = {
+			isa = PBXGroup;
+			children = (
+				8E15A2E51517293300097401 /* ForDifferentIOSVersion */,
+				8E15A2DE1517293300097401 /* Frameworks */,
+				8E15A2DC1517293200097401 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E15A2DC1517293200097401 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E15A2DB1517293200097401 /* ForDifferentIOSVersion.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E15A2DE1517293300097401 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E15A2DF1517293300097401 /* UIKit.framework */,
+				8E15A2E11517293300097401 /* Foundation.framework */,
+				8E15A2E31517293300097401 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E15A2E51517293300097401 /* ForDifferentIOSVersion */ = {
+			isa = PBXGroup;
+			children = (
+				8E15A2EE1517293300097401 /* AppDelegate.h */,
+				8E15A2EF1517293300097401 /* AppDelegate.m */,
+				8E15A2E61517293300097401 /* Supporting Files */,
+			);
+			path = ForDifferentIOSVersion;
+			sourceTree = "<group>";
+		};
+		8E15A2E61517293300097401 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E15A2E71517293300097401 /* ForDifferentIOSVersion-Info.plist */,
+				8E15A2E81517293300097401 /* InfoPlist.strings */,
+				8E15A2EB1517293300097401 /* main.m */,
+				8E15A2ED1517293300097401 /* ForDifferentIOSVersion-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E15A2DA1517293200097401 /* ForDifferentIOSVersion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E15A2F31517293300097401 /* Build configuration list for PBXNativeTarget "ForDifferentIOSVersion" */;
+			buildPhases = (
+				8E15A2D71517293200097401 /* Sources */,
+				8E15A2D81517293200097401 /* Frameworks */,
+				8E15A2D91517293200097401 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ForDifferentIOSVersion;
+			productName = ForDifferentIOSVersion;
+			productReference = 8E15A2DB1517293200097401 /* ForDifferentIOSVersion.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E15A2D21517293200097401 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 8E15A2D51517293200097401 /* Build configuration list for PBXProject "ForDifferentIOSVersion" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8E15A2D01517293200097401;
+			productRefGroup = 8E15A2DC1517293200097401 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E15A2DA1517293200097401 /* ForDifferentIOSVersion */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E15A2D91517293200097401 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E15A2EA1517293300097401 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E15A2D71517293200097401 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E15A2EC1517293300097401 /* main.m in Sources */,
+				8E15A2F01517293300097401 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8E15A2E81517293300097401 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E15A2E91517293300097401 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E15A2F11517293300097401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				SDKROOT = iphoneos5.1;
+			};
+			name = Debug;
+		};
+		8E15A2F21517293300097401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos5.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E15A2F41517293300097401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ForDifferentIOSVersion/ForDifferentIOSVersion-Prefix.pch";
+				INFOPLIST_FILE = "ForDifferentIOSVersion/ForDifferentIOSVersion-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8E15A2F51517293300097401 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ForDifferentIOSVersion/ForDifferentIOSVersion-Prefix.pch";
+				INFOPLIST_FILE = "ForDifferentIOSVersion/ForDifferentIOSVersion-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E15A2D51517293200097401 /* Build configuration list for PBXProject "ForDifferentIOSVersion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E15A2F11517293300097401 /* Debug */,
+				8E15A2F21517293300097401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E15A2F31517293300097401 /* Build configuration list for PBXNativeTarget "ForDifferentIOSVersion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E15A2F41517293300097401 /* Debug */,
+				8E15A2F51517293300097401 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E15A2D21517293200097401 /* Project object */;
+}

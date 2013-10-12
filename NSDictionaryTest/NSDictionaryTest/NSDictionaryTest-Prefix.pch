@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'NSDictionaryTest' target in the 'NSDictionaryTest' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

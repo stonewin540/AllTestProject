@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:TransitionTest/TransitionTest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Transform3DTest/Transform3DTest.xcodeproj">
+   </FileRef>
+</Workspace>
