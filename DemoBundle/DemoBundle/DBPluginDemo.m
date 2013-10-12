@@ -8,20 +8,15 @@
 
 #import "DBPluginDemo.h"
 
-@interface DBPluginDemo ()
-
-@property (nonatomic, copy) NSString *selectedText;
-
-@end
-
 @implementation DBPluginDemo
+{
+    NSString *_selectedText;
+}
 
 #pragma mark - Actions
 
 - (void)showSelected:(NSMenuItem *)sender
 {
-    NSLog(@"%@", self.selectedText);
-    
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert setMessageText:_selectedText];
     [alert runModal];
@@ -39,8 +34,7 @@
     
     NSRange selectedRange = [selectedRanges[0] rangeValue];
     NSString *text = textView.textStorage.string;
-    self.selectedText = [text substringWithRange:selectedRange];
-    NSLog(@"%@", self.selectedText);
+    _selectedText = [[text substringWithRange:selectedRange] copy];
     
     // Hello, welcome to stone's home!
 }
@@ -67,12 +61,10 @@
 + (id)sharedInstance
 {
     static id instance = nil;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
-    
     return instance;
 }
 
@@ -81,7 +73,7 @@
     [DBPluginDemo sharedInstance];
     /*
     NSLog(@"**************************Hello World");
-    //10/12/13 3:03:38.226 PM Xcode[13726]: [MT] PluginLoading: Required plug-in compatibility UUID 37B30044-3B14-46BA-ABAA-F01000C27B63 for plug-in at path '~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/DemoBundle.xcplugin' not present in DVTPlugInCompatibilityUUIDs
+//10/12/13 3:03:38.226 PM Xcode[13726]: [MT] PluginLoading: Required plug-in compatibility UUID 37B30044-3B14-46BA-ABAA-F01000C27B63 for plug-in at path '~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/DemoBundle.xcplugin' not present in DVTPlugInCompatibilityUUIDs
      */
 }
 
