@@ -19,6 +19,9 @@
 		8E696FA818162924001CD984 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E696F9018162924001CD984 /* UIKit.framework */; };
 		8E696FB018162924001CD984 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E696FAE18162924001CD984 /* InfoPlist.strings */; };
 		8E696FB218162924001CD984 /* PagingGridViewTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E696FB118162924001CD984 /* PagingGridViewTestTests.m */; };
+		8EA0995B181A655A003DB165 /* PGVTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA0995A181A655A003DB165 /* PGVTViewController.m */; };
+		8EA0995E181A6588003DB165 /* PGVTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA0995D181A6588003DB165 /* PGVTView.m */; };
+		8EA09961181A662A003DB165 /* PGVTItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA09960181A662A003DB165 /* PGVTItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		8E696FAD18162924001CD984 /* PagingGridViewTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PagingGridViewTestTests-Info.plist"; sourceTree = "<group>"; };
 		8E696FAF18162924001CD984 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E696FB118162924001CD984 /* PagingGridViewTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagingGridViewTestTests.m; sourceTree = "<group>"; };
+		8EA09959181A655A003DB165 /* PGVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGVTViewController.h; sourceTree = "<group>"; };
+		8EA0995A181A655A003DB165 /* PGVTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGVTViewController.m; sourceTree = "<group>"; };
+		8EA0995C181A6588003DB165 /* PGVTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGVTView.h; sourceTree = "<group>"; };
+		8EA0995D181A6588003DB165 /* PGVTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGVTView.m; sourceTree = "<group>"; };
+		8EA0995F181A662A003DB165 /* PGVTItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGVTItem.h; sourceTree = "<group>"; };
+		8EA09960181A662A003DB165 /* PGVTItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGVTItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +118,12 @@
 			children = (
 				8E696F9B18162924001CD984 /* PGVTAppDelegate.h */,
 				8E696F9C18162924001CD984 /* PGVTAppDelegate.m */,
+				8EA09959181A655A003DB165 /* PGVTViewController.h */,
+				8EA0995A181A655A003DB165 /* PGVTViewController.m */,
+				8EA0995C181A6588003DB165 /* PGVTView.h */,
+				8EA0995D181A6588003DB165 /* PGVTView.m */,
+				8EA0995F181A662A003DB165 /* PGVTItem.h */,
+				8EA09960181A662A003DB165 /* PGVTItem.m */,
 				8E696F9E18162924001CD984 /* Images.xcassets */,
 				8E696F9318162924001CD984 /* Supporting Files */,
 			);
@@ -240,6 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA09961181A662A003DB165 /* PGVTItem.m in Sources */,
+				8EA0995B181A655A003DB165 /* PGVTViewController.m in Sources */,
+				8EA0995E181A6588003DB165 /* PGVTView.m in Sources */,
 				8E696F9918162924001CD984 /* main.m in Sources */,
 				8E696F9D18162924001CD984 /* PGVTAppDelegate.m in Sources */,
 			);
@@ -442,6 +460,7 @@
 				8E696FB718162924001CD984 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E696FB818162924001CD984 /* Build configuration list for PBXNativeTarget "PagingGridViewTestTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +469,7 @@
 				8E696FBA18162924001CD984 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

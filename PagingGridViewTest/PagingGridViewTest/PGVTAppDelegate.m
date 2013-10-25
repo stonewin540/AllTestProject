@@ -7,6 +7,7 @@
 //
 
 #import "PGVTAppDelegate.h"
+#import "PGVTViewController.h"
 
 @implementation PGVTAppDelegate
 
@@ -16,6 +17,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    PGVTViewController *controller = [[PGVTViewController alloc] init];
+    self.window.rootViewController = controller;
+    
     return YES;
 }
 
