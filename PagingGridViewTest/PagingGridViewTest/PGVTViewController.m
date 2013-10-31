@@ -17,6 +17,15 @@
 
 @implementation PGVTViewController
 
+#pragma mark - Helper
+
+- (UIColor *)randomColor
+{
+    return [UIColor colorWithRed:arc4random()%255 green:arc4random()%255 blue:arc4random()%255 alpha:1];
+}
+
+#pragma mark - Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,7 +63,7 @@
 
 - (NSInteger)pagingGridView:(PGVTView *)pagingGridView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return 20;
 }
 
 - (PGVTItem *)pagingGridView:(PGVTView *)pagingGridView itemForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,7 +74,7 @@
     if (!item)
     {
         item = [[PGVTItem alloc] initWithStyle:PGVTItemStyleDefault reuseIdentifier:identifier];
-        item.contentView.backgroundColor = [UIColor colorWithRed:arc4random()/255.f green:arc4random()/255.f blue:arc4random()/255.f alpha:1];
+        item.contentView.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
     }
     
     item.textLabel.text = [NSString stringWithFormat:@"%d", indexPath.row];

@@ -9,6 +9,9 @@
 #import "PGVTItem.h"
 
 @implementation PGVTItem
+{
+    UIView *_separator;
+}
 
 #pragma mark - Views
 
@@ -17,6 +20,14 @@
     _textLabel = [[UILabel alloc] initWithFrame:_contentView.bounds];
     _textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_contentView addSubview:_textLabel];
+    
+    CGRect frame = _contentView.bounds;
+    frame.size.height = 1;
+    frame.origin.y = CGRectGetHeight(_contentView.frame) - frame.size.height;
+    _separator = [[UIView alloc] initWithFrame:frame];
+    _separator.backgroundColor = [UIColor lightGrayColor];
+    _separator.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [_contentView addSubview:_separator];
 }
 
 #pragma mark - Lifecycle

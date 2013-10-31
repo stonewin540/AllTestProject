@@ -8,9 +8,12 @@
 
 #import "PGVTView.h"
 
+#define kItemHeight 44
+
 @implementation PGVTView
 {
-    NSMutableDictionary *_itemPool;
+    NSMutableDictionary *_reuseableItems;
+    NSMutableDictionary *_visibleItems;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -18,7 +21,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _itemPool = [[NSMutableDictionary alloc] init];
+        _reuseableItems = [[NSMutableDictionary alloc] init];
+        _visibleItems = [[NSMutableDictionary alloc] init];
         
     }
     return self;
@@ -30,25 +34,26 @@
     if (_dataSource)
     {
         numberOfItems = [_dataSource pagingGridView:self numberOfItemsInSection:0];
+        CGSize contentSize = CGSizeMake(CGRectGetWidth(self.frame), numberOfItems*kItemHeight);
+        self.contentSize = contentSize;
+        numberOfItems = ceilf(CGRectGetHeight(self.frame) / kItemHeight);
     }
     
-    CGSize contentSize = CGSizeMake(CGRectGetWidth(self.frame), 0);
-    CGRect itemFrame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 44);
+    
+    CGRect itemFrame = CGRectMake(0, 0, CGRectGetWidth(self.frame), kItemHeight);
     for (int i=0; i<numberOfItems; i++)
     {
         itemFrame.origin.y = i * itemFrame.size.height;
         PGVTItem *item = nil;
         if (_dataSource)
         {
-            item = [_dataSource pagingGridView:self itemForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            item = [_dataSource pagingGridView:self itemForRowAtIndexPath:indexPath];
             item.frame = itemFrame;
-            [self enqueueReuseableItem:item];
+            [_visibleItems setObject:item forKey:indexPath];
             [self addSubview:item];
-            contentSize.height += itemFrame.size.height;
         }
     }
-    
-    self.contentSize = contentSize;
 }
 
 - (void)layoutSubviews
@@ -60,18 +65,19 @@
 
 - (PGVTItem *)dequeueReuseableItemForReuseIdentifier:(NSString *)reuseIdentifer
 {
-    NSMutableSet *set = [_itemPool objectForKey:reuseIdentifer];
+    NSMutableSet *set = [_reuseableItems objectForKey:reuseIdentifer];
     PGVTItem *item = [set anyObject];
+    [set removeObject:item];
     return item;
 }
 
 - (void)enqueueReuseableItem:(PGVTItem *)item
 {
-    NSMutableSet *set = [_itemPool objectForKey:item.reuseIdentifier];
+    NSMutableSet *set = [_reuseableItems objectForKey:item.reuseIdentifier];
     if (!set)
     {
         set = [[NSMutableSet alloc] init];
-        [_itemPool setObject:set forKey:item.reuseIdentifier];
+        [_reuseableItems setObject:set forKey:item.reuseIdentifier];
     }
     [set addObject:item];
 }
