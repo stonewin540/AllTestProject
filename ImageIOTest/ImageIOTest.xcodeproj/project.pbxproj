@@ -19,6 +19,10 @@
 		8E3138CC18223BB70035FEBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3138B418223BB70035FEBD /* UIKit.framework */; };
 		8E3138D418223BB70035FEBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E3138D218223BB70035FEBD /* InfoPlist.strings */; };
 		8E3138D618223BB70035FEBD /* ImageIOTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3138D518223BB70035FEBD /* ImageIOTestTests.m */; };
+		8E3138E118223DC40035FEBD /* IIOTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3138E018223DC40035FEBD /* IIOTViewController.m */; };
+		8E3138E31822417D0035FEBD /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3138E21822417D0035FEBD /* AssetsLibrary.framework */; };
+		8E3138E618224A380035FEBD /* IIOTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3138E518224A380035FEBD /* IIOTDetailViewController.m */; };
+		8E3138E8182265910035FEBD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3138E7182265910035FEBD /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,12 @@
 		8E3138D118223BB70035FEBD /* ImageIOTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageIOTestTests-Info.plist"; sourceTree = "<group>"; };
 		8E3138D318223BB70035FEBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E3138D518223BB70035FEBD /* ImageIOTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageIOTestTests.m; sourceTree = "<group>"; };
+		8E3138DF18223DC30035FEBD /* IIOTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIOTViewController.h; sourceTree = "<group>"; };
+		8E3138E018223DC40035FEBD /* IIOTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIOTViewController.m; sourceTree = "<group>"; };
+		8E3138E21822417D0035FEBD /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		8E3138E418224A380035FEBD /* IIOTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIOTDetailViewController.h; sourceTree = "<group>"; };
+		8E3138E518224A380035FEBD /* IIOTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIOTDetailViewController.m; sourceTree = "<group>"; };
+		8E3138E7182265910035FEBD /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3138E8182265910035FEBD /* ImageIO.framework in Frameworks */,
+				8E3138E31822417D0035FEBD /* AssetsLibrary.framework in Frameworks */,
 				8E3138B318223BB70035FEBD /* CoreGraphics.framework in Frameworks */,
 				8E3138B518223BB70035FEBD /* UIKit.framework in Frameworks */,
 				8E3138B118223BB70035FEBD /* Foundation.framework in Frameworks */,
@@ -96,6 +108,8 @@
 		8E3138AF18223BB70035FEBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E3138E7182265910035FEBD /* ImageIO.framework */,
+				8E3138E21822417D0035FEBD /* AssetsLibrary.framework */,
 				8E3138B018223BB70035FEBD /* Foundation.framework */,
 				8E3138B218223BB70035FEBD /* CoreGraphics.framework */,
 				8E3138B418223BB70035FEBD /* UIKit.framework */,
@@ -109,6 +123,10 @@
 			children = (
 				8E3138BF18223BB70035FEBD /* IIOTAppDelegate.h */,
 				8E3138C018223BB70035FEBD /* IIOTAppDelegate.m */,
+				8E3138DF18223DC30035FEBD /* IIOTViewController.h */,
+				8E3138E018223DC40035FEBD /* IIOTViewController.m */,
+				8E3138E418224A380035FEBD /* IIOTDetailViewController.h */,
+				8E3138E518224A380035FEBD /* IIOTDetailViewController.m */,
 				8E3138C218223BB70035FEBD /* Images.xcassets */,
 				8E3138B718223BB70035FEBD /* Supporting Files */,
 			);
@@ -240,7 +258,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3138E618224A380035FEBD /* IIOTDetailViewController.m in Sources */,
 				8E3138BD18223BB70035FEBD /* main.m in Sources */,
+				8E3138E118223DC40035FEBD /* IIOTViewController.m in Sources */,
 				8E3138C118223BB70035FEBD /* IIOTAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -349,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
