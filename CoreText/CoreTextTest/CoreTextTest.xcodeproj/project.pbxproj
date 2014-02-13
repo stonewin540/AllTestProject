@@ -24,6 +24,7 @@
 		8E62BA6D18A8CB69001DA4FD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E62BA6C18A8CB69001DA4FD /* CoreText.framework */; };
 		8E62BA7718ACA64B001DA4FD /* CTTMarkupParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E62BA7618ACA64B001DA4FD /* CTTMarkupParser.m */; };
 		8E62BA7918ACBE16001DA4FD /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA7818ACBE16001DA4FD /* test.txt */; };
+		8E62BA7C18ACD3F4001DA4FD /* CTTColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E62BA7B18ACD3F4001DA4FD /* CTTColumnView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		8E62BA7518ACA64B001DA4FD /* CTTMarkupParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTMarkupParser.h; sourceTree = "<group>"; };
 		8E62BA7618ACA64B001DA4FD /* CTTMarkupParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTMarkupParser.m; sourceTree = "<group>"; };
 		8E62BA7818ACBE16001DA4FD /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		8E62BA7A18ACD3F4001DA4FD /* CTTColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTColumnView.h; sourceTree = "<group>"; };
+		8E62BA7B18ACD3F4001DA4FD /* CTTColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTColumnView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				8E62BA7818ACBE16001DA4FD /* test.txt */,
 				8E62BA7518ACA64B001DA4FD /* CTTMarkupParser.h */,
 				8E62BA7618ACA64B001DA4FD /* CTTMarkupParser.m */,
+				8E62BA7A18ACD3F4001DA4FD /* CTTColumnView.h */,
+				8E62BA7B18ACD3F4001DA4FD /* CTTColumnView.m */,
 				8E62BA4718A8C5E3001DA4FD /* CTTAppDelegate.h */,
 				8E62BA4818A8C5E3001DA4FD /* CTTAppDelegate.m */,
 				8E62BA6718A8C622001DA4FD /* CTTView.h */,
@@ -262,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E62BA7C18ACD3F4001DA4FD /* CTTColumnView.m in Sources */,
 				8E62BA7718ACA64B001DA4FD /* CTTMarkupParser.m in Sources */,
 				8E62BA4918A8C5E3001DA4FD /* CTTAppDelegate.m in Sources */,
 				8E62BA4518A8C5E3001DA4FD /* main.m in Sources */,

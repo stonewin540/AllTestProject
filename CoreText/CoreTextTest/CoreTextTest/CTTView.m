@@ -10,12 +10,70 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
 #import "CTTMarkupParser.h"
+#import "CTTColumnView.h"
 
 @implementation CTTView
 {
     NSMutableArray *_components;
     NSMutableArray *_ranges;
+    CGFloat _frameXOffset, _frameYOffset;
 }
+
+#pragma mark - Public
+
+- (void)buildFrames
+{
+    _frameXOffset = 20;// 1
+    _frameYOffset = 20;
+    self.pagingEnabled = YES;
+    self.delegate = self;
+    self.frames = [NSMutableArray array];
+    
+    CGMutablePathRef path = CGPathCreateMutable();// 2
+    CGRect textFrame = CGRectInset(self.bounds, _frameXOffset, _frameYOffset);
+    CGPathAddRect(path, NULL, textFrame);
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
+    
+    int textPos = 0;// 3
+    int columnIndex = 0;
+    NSUInteger length = [self.attributedString length];
+    
+    while (textPos < length)// 4
+    {
+        CGPoint colOffset;
+        colOffset.x = ((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
+        colOffset.y = 20;
+        CGRect colRect = CGRectZero;
+        colRect.size.width = CGRectGetWidth(textFrame) / 2 - 10;
+        colRect.size.height = CGRectGetHeight(textFrame) - 40;
+        
+        CGMutablePathRef colPath = CGPathCreateMutable();
+        CGPathAddRect(colPath, NULL, colRect);
+        
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), colPath, NULL);
+        CFRange frameRange = CTFrameGetVisibleStringRange(frame);// 5
+        
+        CTTColumnView *content = [[CTTColumnView alloc] init];
+        content.backgroundColor = [UIColor yellowColor];
+        content.frame = CGRectMake(colOffset.x, colOffset.y, colRect.size.width, colRect.size.height);
+        [content setCTFrame:frame];// 6
+        [self.frames addObject:(__bridge id)frame];
+        [self addSubview:content];
+        
+        textPos += frameRange.length;
+        columnIndex++;
+        
+        CFRelease(colPath);
+    }
+    
+    int totalPages = (columnIndex + 1) / 2;// 7
+    self.contentSize = CGSizeMake(totalPages * self.bounds.size.width, textFrame.size.height);
+    
+    CFRelease(path);
+}
+
+#pragma mark - Lifecycle
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,27 +89,31 @@
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    if (!context)
-    {
-        return;
-    }
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    if (!context)
+//    {
+//        return;
+//    }
+//    
+//    // Flip the coordinate system
+//    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+//    CGContextTranslateCTM(context, 0, CGRectGetHeight(self.bounds));
+//    CGContextScaleCTM(context, 1, -1);
+//    
+//    CGMutablePathRef path = CGPathCreateMutable();
+//    CGPathAddRect(path, NULL, self.bounds);
+//    
+//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
+//    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+//    CTFrameDraw(frame, context);
+//    
+//    CFRelease(path);
+//    CFRelease(framesetter);
+//    CFRelease(frame);
     
-    // Flip the coordinate system
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, CGRectGetHeight(self.bounds));
-    CGContextScaleCTM(context, 1, -1);
     
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, self.bounds);
     
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-    CTFrameDraw(frame, context);
     
-    CFRelease(path);
-    CFRelease(framesetter);
-    CFRelease(frame);
     
 //    CGContextRef context = UIGraphicsGetCurrentContext();
 //    if (!context || !self.attributedString)
@@ -188,6 +250,7 @@
     CTTMarkupParser *p = [[CTTMarkupParser alloc] init];
     NSAttributedString *attString = [p attrStringFromMarkup:text];
     ((CTTView *)self.view).attributedString = attString;
+    [((CTTView *)self.view) buildFrames];
 }
 
 - (void)viewDidAppear:(BOOL)animated

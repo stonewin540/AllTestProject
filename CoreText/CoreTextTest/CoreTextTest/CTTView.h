@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CTTView : UIView
+@interface CTTView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSAttributedString *attributedString;
+@property (nonatomic, strong) NSMutableArray *frames;
+
+- (void)buildFrames;
 
 @end
 
