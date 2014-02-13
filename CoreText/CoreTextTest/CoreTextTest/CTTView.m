@@ -29,48 +29,48 @@
     self.delegate = self;
     self.frames = [NSMutableArray array];
     
-    CGMutablePathRef path = CGPathCreateMutable();// 2
     CGRect textFrame = CGRectInset(self.bounds, _frameXOffset, _frameYOffset);
-    CGPathAddRect(path, NULL, textFrame);
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
     
     int textPos = 0;// 3
     int columnIndex = 0;
     NSUInteger length = [self.attributedString length];
+    CGRect columnFrame;
+    columnFrame.origin.y = CGRectGetMinY(textFrame);//20;
+    columnFrame.size.width = CGRectGetWidth(textFrame);// / 2 - 10;
+    columnFrame.size.height = CGRectGetHeight(textFrame);// - 40;
     
     while (textPos < length)// 4
     {
-        CGRect contentFrame;
-        contentFrame.origin.x = ((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
-        contentFrame.origin.y = 20;
-        contentFrame.size.width = CGRectGetWidth(textFrame) / 2 - 10;
-        contentFrame.size.height = CGRectGetHeight(textFrame) - 40;
         
-        CGMutablePathRef colPath = CGPathCreateMutable();
-        CGPathAddRect(colPath, NULL, CGRectMake(0, 0, CGRectGetWidth(contentFrame), CGRectGetHeight(contentFrame)));
+        // for example
+        //                                  0 + 1 +            0 * 1   *    20          +            0 * 280 = 20
+        //                                  1 + 1 +            1 * 1   *    20          +            1 * 280 = 340
+        // ...
+        columnFrame.origin.x = ((columnIndex + 1 + (columnIndex * 1)) * _frameXOffset) + (columnIndex * CGRectGetWidth(textFrame));//((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
         
-        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), colPath, NULL);
+        CTTColumnView *columnView = [[CTTColumnView alloc] initWithFrame:columnFrame];
+        columnView.backgroundColor = [UIColor colorWithRed:((arc4random() % 255) / 255.f) green:((arc4random() % 255) / 255.f) blue:((arc4random() % 255) / 255.f) alpha:1];
+        [self addSubview:columnView];
+        
+        CGPathRef columnPath = CGPathCreateWithRect(columnView.bounds, NULL);
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), columnPath, NULL);
         CFRange frameRange = CTFrameGetVisibleStringRange(frame);// 5
         
-        CTTColumnView *content = [[CTTColumnView alloc] init];
-        content.backgroundColor = [UIColor yellowColor];
-        content.frame = contentFrame;
-        [content setCTFrame:frame];// 6
+        [columnView setCTFrame:frame];// 6
         [self.frames addObject:(__bridge id)frame];
-        [self addSubview:content];
         
         textPos += frameRange.length;
         columnIndex++;
         
-        CFRelease(colPath);
+        CFRelease(columnPath);
         CFRelease(frame);
     }
     
-    int totalPages = (columnIndex + 1) / 2;// 7
-    self.contentSize = CGSizeMake(totalPages * self.bounds.size.width, textFrame.size.height);
+    int totalPages = columnIndex;//(columnIndex + 1) / 2;// 7
+    self.contentSize = CGSizeMake(totalPages * CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
     
-    CFRelease(path);
     CFRelease(framesetter);
 }
 
