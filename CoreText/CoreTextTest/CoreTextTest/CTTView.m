@@ -41,22 +41,21 @@
     
     while (textPos < length)// 4
     {
-        CGPoint colOffset;
-        colOffset.x = ((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
-        colOffset.y = 20;
-        CGRect colRect = CGRectZero;
-        colRect.size.width = CGRectGetWidth(textFrame) / 2 - 10;
-        colRect.size.height = CGRectGetHeight(textFrame) - 40;
+        CGRect contentFrame;
+        contentFrame.origin.x = ((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
+        contentFrame.origin.y = 20;
+        contentFrame.size.width = CGRectGetWidth(textFrame) / 2 - 10;
+        contentFrame.size.height = CGRectGetHeight(textFrame) - 40;
         
         CGMutablePathRef colPath = CGPathCreateMutable();
-        CGPathAddRect(colPath, NULL, colRect);
+        CGPathAddRect(colPath, NULL, CGRectMake(0, 0, CGRectGetWidth(contentFrame), CGRectGetHeight(contentFrame)));
         
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), colPath, NULL);
         CFRange frameRange = CTFrameGetVisibleStringRange(frame);// 5
         
         CTTColumnView *content = [[CTTColumnView alloc] init];
         content.backgroundColor = [UIColor yellowColor];
-        content.frame = CGRectMake(colOffset.x, colOffset.y, colRect.size.width, colRect.size.height);
+        content.frame = contentFrame;
         [content setCTFrame:frame];// 6
         [self.frames addObject:(__bridge id)frame];
         [self addSubview:content];
@@ -65,12 +64,14 @@
         columnIndex++;
         
         CFRelease(colPath);
+        CFRelease(frame);
     }
     
     int totalPages = (columnIndex + 1) / 2;// 7
     self.contentSize = CGSizeMake(totalPages * self.bounds.size.width, textFrame.size.height);
     
     CFRelease(path);
+    CFRelease(framesetter);
 }
 
 #pragma mark - Lifecycle
@@ -225,10 +226,10 @@
 - (void)loadView
 {
     self.view = [[CTTView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-    self.view.backgroundColor = [UIColor whiteColor];
-    ((CTTView *)self.view).attributedString =
+    self.view.backgroundColor = [UIColor grayColor];
+//    ((CTTView *)self.view).attributedString =
 //    [[NSAttributedString alloc] initWithString:@"Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine.Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine.Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine.Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine.Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine."];
-    [[NSAttributedString alloc] initWithString:@"Hello, World! [bus]I know nothing in the world that has as much power as a word. [bus]Sometimes I write one, and I look at it, until it begins to shine."];
+//    [[NSAttributedString alloc] initWithString:@"Hello, World! [bus]I know nothing in the world that has as much power as a word. [bus]Sometimes I write one, and I look at it, until it begins to shine."];
 }
 
 - (void)viewDidLoad
