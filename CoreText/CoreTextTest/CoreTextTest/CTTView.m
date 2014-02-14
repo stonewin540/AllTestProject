@@ -331,13 +331,13 @@
     [((CTTView *)self.view) buildFrames];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    CGRect slice, remainder;
-    CGRectDivide(self.view.bounds, &slice, &remainder, 20, CGRectMinYEdge);
-    self.view.frame = remainder;
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//
+//    CGRect slice, remainder;
+//    CGRectDivide(self.view.bounds, &slice, &remainder, 20, CGRectMinYEdge);
+//    self.view.frame = remainder;
+//}
 
 @end
