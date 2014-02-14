@@ -125,7 +125,7 @@
         columnFrame.origin.x = ((columnIndex + 1 + (columnIndex * 1)) * _frameXOffset) + (columnIndex * CGRectGetWidth(textFrame));//((columnIndex + 1) * _frameXOffset) + (columnIndex * (CGRectGetWidth(textFrame) / 2));
         
         CTTColumnView *columnView = [[CTTColumnView alloc] initWithFrame:columnFrame];
-        columnView.backgroundColor = [UIColor colorWithRed:((arc4random() % 255) / 255.f) green:((arc4random() % 255) / 255.f) blue:((arc4random() % 255) / 255.f) alpha:1];
+        columnView.backgroundColor = [UIColor colorWithRed:199 / 255.f green:237 / 255.f blue:204 / 255.f alpha:1];//[UIColor colorWithRed:((arc4random() % 255) / 255.f) green:((arc4random() % 255) / 255.f) blue:((arc4random() % 255) / 255.f) alpha:1];
         [self addSubview:columnView];
         
         CGPathRef columnPath = CGPathCreateWithRect(columnView.bounds, NULL);
