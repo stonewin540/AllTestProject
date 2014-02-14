@@ -14,6 +14,8 @@
     CTFrameRef _ctFrame;
 }
 
+@property (nonatomic, strong) NSMutableArray *images;
+
 - (void)setCTFrame:(CTFrameRef)f;
 
 @end

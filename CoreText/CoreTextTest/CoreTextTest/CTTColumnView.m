@@ -23,7 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.images = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -44,6 +44,14 @@
     CGContextScaleCTM(context, 1, -1);
     
     CTFrameDraw(_ctFrame, context);
+    
+    // render images
+    for (NSArray *imageData in self.images)
+    {
+        UIImage *img = imageData[0];
+        CGRect imgBounds = CGRectFromString(imageData[1]);
+        CGContextDrawImage(context, imgBounds, img.CGImage);
+    }
 }
 
 @end

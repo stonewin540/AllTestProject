@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
+@class CTTColumnView;
 
 @interface CTTView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSAttributedString *attributedString;
 @property (nonatomic, strong) NSMutableArray *frames;
+@property (nonatomic, strong) NSArray *images;
 
 - (void)buildFrames;
+- (void)setAttributedString:(NSAttributedString *)attributedString withImages:(NSArray *)imgs;
+- (void)attachImagesWithFrame:(CTFrameRef)f inColumnView:(CTTColumnView *)col;
 
 @end
 

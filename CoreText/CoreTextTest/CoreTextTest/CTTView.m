@@ -8,7 +8,6 @@
 
 #import "CTTView.h"
 #import <QuartzCore/QuartzCore.h>
-#import <CoreText/CoreText.h>
 #import "CTTMarkupParser.h"
 #import "CTTColumnView.h"
 
@@ -20,6 +19,81 @@
 }
 
 #pragma mark - Public
+
+- (void)attachImagesWithFrame:(CTFrameRef)f inColumnView:(CTTColumnView *)col
+{
+    NSArray *lines = (__bridge NSArray *)CTFrameGetLines(f);// 1
+    
+    CGPoint origins[[lines count]];
+    CTFrameGetLineOrigins(f, CFRangeMake(0, 0), origins);// 2
+    
+    int imgIndex = 0;// 3
+    NSDictionary *nextImage = self.images[imgIndex];
+    int imgLocation = [nextImage[@"location"] intValue];
+    
+    // find images for the current column
+    CFRange frameRange = CTFrameGetVisibleStringRange(f);// 4
+    while (imgLocation < frameRange.location)
+    {
+        imgIndex++;
+        if (imgIndex >= [self.images count])
+        {
+            // quit if no images for this column
+            return;
+        }
+        
+        nextImage = self.images[imgIndex];
+        imgLocation = [nextImage[@"location"] intValue];
+    }
+    
+    NSUInteger lineIndex = 0;
+    for (id lineObj in lines)// 5
+    {
+        CTLineRef line = (__bridge CTLineRef)lineObj;
+        
+        for (id runObj in (__bridge NSArray *)CTLineGetGlyphRuns(line))// 6
+        {
+            CTRunRef run = (__bridge CTRunRef)runObj;
+            CFRange runRange = CTRunGetStringRange(run);
+            
+            if ((runRange.location <= imgLocation) && (runRange.location+runRange.length > imgLocation))// 7
+            {
+                CGRect runBounds;
+                CGFloat ascent, descent;
+                runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL);// 8
+                runBounds.size.height = ascent + descent;
+                
+                CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);// 9
+                runBounds.origin.x = origins[lineIndex].x + self.frame.origin.x + xOffset + _frameXOffset;
+                runBounds.origin.y = origins[lineIndex].y + self.frame.origin.y + _frameYOffset;
+                runBounds.origin.y -= descent;
+                
+                UIImage *img = [UIImage imageNamed:nextImage[@"fileName"]];
+                CGPathRef pathRef = CTFrameGetPath(f);// 10
+                CGRect colRect = CGPathGetBoundingBox(pathRef);
+                
+                CGRect imgBounds = CGRectOffset(runBounds, colRect.origin.x - _frameXOffset - self.contentOffset.x, colRect.origin.y - _frameYOffset - self.frame.origin.y);
+                [col.images addObject:@[img, NSStringFromCGRect(imgBounds)]];// 11
+                
+                // 12
+                imgIndex++;
+                if (imgIndex < [self.images count])
+                {
+                    nextImage = self.images[imgIndex];
+                    imgLocation = [nextImage[@"location"] intValue];
+                }
+            }
+        }
+        
+        lineIndex++;
+    }
+}
+
+- (void)setAttributedString:(NSAttributedString *)attributedString withImages:(NSArray *)imgs
+{
+    self.attributedString = attributedString;
+    self.images = imgs;
+}
 
 - (void)buildFrames
 {
@@ -59,6 +133,7 @@
         CFRange frameRange = CTFrameGetVisibleStringRange(frame);// 5
         
         [columnView setCTFrame:frame];// 6
+        [self attachImagesWithFrame:frame inColumnView:columnView];
         [self.frames addObject:(__bridge id)frame];
         
         textPos += frameRange.length;
@@ -236,7 +311,8 @@
 {
     [super viewDidLoad];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"txt"];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"txt"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"zombies" ofType:@"txt"];
     if (![path length])
     {
         return;
@@ -250,7 +326,8 @@
     
     CTTMarkupParser *p = [[CTTMarkupParser alloc] init];
     NSAttributedString *attString = [p attrStringFromMarkup:text];
-    ((CTTView *)self.view).attributedString = attString;
+//    ((CTTView *)self.view).attributedString = attString;
+    [((CTTView *)self.view) setAttributedString:attString withImages:p.images];
     [((CTTView *)self.view) buildFrames];
 }
 
