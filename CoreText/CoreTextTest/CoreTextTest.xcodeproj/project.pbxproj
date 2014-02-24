@@ -25,9 +25,6 @@
 		8E62BA7718ACA64B001DA4FD /* CTTMarkupParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E62BA7618ACA64B001DA4FD /* CTTMarkupParser.m */; };
 		8E62BA7918ACBE16001DA4FD /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA7818ACBE16001DA4FD /* test.txt */; };
 		8E62BA7C18ACD3F4001DA4FD /* CTTColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E62BA7B18ACD3F4001DA4FD /* CTTColumnView.m */; };
-		8E62BA8118ADFD55001DA4FD /* zombie1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA7D18ADFD55001DA4FD /* zombie1.jpg */; };
-		8E62BA8218ADFD55001DA4FD /* zombie2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA7E18ADFD55001DA4FD /* zombie2.jpg */; };
-		8E62BA8318ADFD55001DA4FD /* zombie3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA7F18ADFD55001DA4FD /* zombie3.jpg */; };
 		8E62BA8418ADFD55001DA4FD /* zombies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BA8018ADFD55001DA4FD /* zombies.txt */; };
 /* End PBXBuildFile section */
 
@@ -67,9 +64,6 @@
 		8E62BA7818ACBE16001DA4FD /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 		8E62BA7A18ACD3F4001DA4FD /* CTTColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTColumnView.h; sourceTree = "<group>"; };
 		8E62BA7B18ACD3F4001DA4FD /* CTTColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTColumnView.m; sourceTree = "<group>"; };
-		8E62BA7D18ADFD55001DA4FD /* zombie1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zombie1.jpg; sourceTree = "<group>"; };
-		8E62BA7E18ADFD55001DA4FD /* zombie2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zombie2.jpg; sourceTree = "<group>"; };
-		8E62BA7F18ADFD55001DA4FD /* zombie3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zombie3.jpg; sourceTree = "<group>"; };
 		8E62BA8018ADFD55001DA4FD /* zombies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zombies.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,9 +128,6 @@
 		8E62BA3E18A8C5E3001DA4FD /* CoreTextTest */ = {
 			isa = PBXGroup;
 			children = (
-				8E62BA7D18ADFD55001DA4FD /* zombie1.jpg */,
-				8E62BA7E18ADFD55001DA4FD /* zombie2.jpg */,
-				8E62BA7F18ADFD55001DA4FD /* zombie3.jpg */,
 				8E62BA8018ADFD55001DA4FD /* zombies.txt */,
 				8E62BA7818ACBE16001DA4FD /* test.txt */,
 				8E62BA7518ACA64B001DA4FD /* CTTMarkupParser.h */,
@@ -259,10 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E62BA4318A8C5E3001DA4FD /* InfoPlist.strings in Resources */,
-				8E62BA8318ADFD55001DA4FD /* zombie3.jpg in Resources */,
-				8E62BA8118ADFD55001DA4FD /* zombie1.jpg in Resources */,
 				8E62BA4B18A8C5E3001DA4FD /* Images.xcassets in Resources */,
-				8E62BA8218ADFD55001DA4FD /* zombie2.jpg in Resources */,
 				8E62BA8418ADFD55001DA4FD /* zombies.txt in Resources */,
 				8E62BA7918ACBE16001DA4FD /* test.txt in Resources */,
 			);
