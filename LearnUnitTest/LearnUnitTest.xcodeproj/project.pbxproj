@@ -19,6 +19,7 @@
 		8E3450A518C8586B001F8D1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E34508D18C8586B001F8D1B /* UIKit.framework */; };
 		8E3450AD18C8586B001F8D1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E3450AB18C8586B001F8D1B /* InfoPlist.strings */; };
 		8E3450AF18C8586B001F8D1B /* LearnUnitTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3450AE18C8586B001F8D1B /* LearnUnitTestTests.m */; };
+		8E3450BA18C8599A001F8D1B /* LUTObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3450B918C8599A001F8D1B /* LUTObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		8E3450AA18C8586B001F8D1B /* LearnUnitTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LearnUnitTestTests-Info.plist"; sourceTree = "<group>"; };
 		8E3450AC18C8586B001F8D1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E3450AE18C8586B001F8D1B /* LearnUnitTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearnUnitTestTests.m; sourceTree = "<group>"; };
+		8E3450B818C8599A001F8D1B /* LUTObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUTObject.h; sourceTree = "<group>"; };
+		8E3450B918C8599A001F8D1B /* LUTObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LUTObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 			children = (
 				8E34509818C8586B001F8D1B /* LUTAppDelegate.h */,
 				8E34509918C8586B001F8D1B /* LUTAppDelegate.m */,
+				8E3450B818C8599A001F8D1B /* LUTObject.h */,
+				8E3450B918C8599A001F8D1B /* LUTObject.m */,
 				8E34509B18C8586B001F8D1B /* Images.xcassets */,
 				8E34509018C8586B001F8D1B /* Supporting Files */,
 			);
@@ -241,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E34509A18C8586B001F8D1B /* LUTAppDelegate.m in Sources */,
+				8E3450BA18C8599A001F8D1B /* LUTObject.m in Sources */,
 				8E34509618C8586B001F8D1B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
