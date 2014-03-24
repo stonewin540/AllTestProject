@@ -30,6 +30,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     SRTScrollSelector *selector = [[SRTScrollSelector alloc] initWithFrame:CGRectMake(0, 40, CGRectGetWidth(self.view.bounds), 40)];
+    selector.backgroundColor = [UIColor redColor];
     selector.titles = @[@"title0", @"title1", @"title2", @"title3", @"title4", @"title5", @"title6", @"title7", @"title8", @"title9", @"title10"];
     [self.view addSubview:selector];
 }

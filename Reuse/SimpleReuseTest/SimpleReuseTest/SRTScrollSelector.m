@@ -102,6 +102,7 @@ static const CGFloat kGapSide = 20;
 - (CGRect)currentScrollVisibleRect
 {
     CGRect visibleRect = _scrollView.bounds;
+    visibleRect.size.width += kGapSide;
     if (_scrollView.contentSize.width > CGRectGetWidth(_scrollView.bounds))
     {
         CGPoint contentOffset = _scrollView.contentOffset;
@@ -122,6 +123,7 @@ static const CGFloat kGapSide = 20;
 - (ZhiyueScrollSelectorItem *)defaultItem
 {
     ZhiyueScrollSelectorItem *item = [[ZhiyueScrollSelectorItem alloc] init];
+    item.backgroundColor = [UIColor greenColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleItemTapped:)];
     [item addGestureRecognizer:tap];
     item.userInteractionEnabled = YES;
@@ -212,7 +214,7 @@ static const CGFloat kGapSide = 20;
         
         // scroll view
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectInset(self.bounds, (kGapSide / 2), 0)];
-        _scrollView.backgroundColor = self.backgroundColor;
+        _scrollView.backgroundColor = [UIColor blueColor];//self.backgroundColor;
         _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -240,13 +242,13 @@ static const CGFloat kGapSide = 20;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor
-{
-    [super setBackgroundColor:backgroundColor];
-    _scrollView.backgroundColor = backgroundColor;
-    _leftShadowView.backgroundColor = backgroundColor;
-    _rightShadowView.backgroundColor = backgroundColor;
-}
+//- (void)setBackgroundColor:(UIColor *)backgroundColor
+//{
+//    [super setBackgroundColor:backgroundColor];
+//    _scrollView.backgroundColor = backgroundColor;
+//    _leftShadowView.backgroundColor = backgroundColor;
+//    _rightShadowView.backgroundColor = backgroundColor;
+//}
 
 - (void)reloadData
 {
