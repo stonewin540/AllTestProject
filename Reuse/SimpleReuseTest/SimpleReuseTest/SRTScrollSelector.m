@@ -12,7 +12,46 @@ static const NSUInteger kSection = 0;
 static const CGFloat kGapBetweenItem = 20;
 static const CGFloat kGapSide = 20;
 
-#define kFontTitleLabel [UIFont boldSystemFontOfSize:17]
+#define kFontTitleLabel             [UIFont boldSystemFontOfSize:17]
+#define kColorTitleLabelNormal      [UIColor lightGrayColor]
+#define kColorTitleLabelSelected    [UIColor blueColor]
+
+#pragma mark -
+#pragma mark - Item
+
+@interface ZhiyueScrollSelectorItem : UIView
+
+@property (nonatomic, strong, readonly) UILabel *textLabel;
+
+@end
+
+@implementation ZhiyueScrollSelectorItem
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = [UIColor clearColor];
+        
+        _textLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _textLabel.textColor = kColorTitleLabelNormal;
+        _textLabel.textAlignment = UITextAlignmentCenter;
+        _textLabel.font = kFontTitleLabel;
+        [self addSubview:_textLabel];
+    }
+    return self;
+}
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+#pragma mark - ScrollSelector
+
 
 @interface SRTScrollSelector () <UIScrollViewDelegate>
 
@@ -20,9 +59,10 @@ static const CGFloat kGapSide = 20;
 
 @implementation SRTScrollSelector
 {
-    NSMutableDictionary *_rectForIndexPath, *_buttonForIndexPath;
-    NSMutableSet *_visibleIndexPaths, *_invisibleIndexPaths;
+    NSMutableDictionary *_rectForIndexPath, *_itemForIndexPath;
+    NSMutableSet *_invisibleItems;
     NSIndexPath *_selectedIndexPath;
+    NSValue *_scrolledRect;
     
     UIScrollView *_scrollView;
     UIView *_leftShadowView, *_rightShadowView;
@@ -41,9 +81,9 @@ static const CGFloat kGapSide = 20;
     _rightShadowView.hidden = rightHidden;
 }
 
-- (NSIndexPath *)indexPathForButton:(UIButton *)button
+- (NSIndexPath *)indexPathForItem:(ZhiyueScrollSelectorItem *)item
 {
-    NSValue *value = [NSValue valueWithCGRect:button.frame];
+    NSValue *value = [NSValue valueWithCGRect:item.frame];
     NSArray *allKeys = [_rectForIndexPath allKeysForObject:value];
     if ([allKeys count] > 1)
     {
@@ -52,10 +92,11 @@ static const CGFloat kGapSide = 20;
     return [allKeys lastObject];
 }
 
-- (void)setButtonSelected:(BOOL)selected withIndexPath:(NSIndexPath *)indexPath
+- (void)setItemSelected:(BOOL)selected withIndexPath:(NSIndexPath *)indexPath
 {
-    UIButton *button = _buttonForIndexPath[indexPath];
-    button.selected = selected;
+    ZhiyueScrollSelectorItem *item = _itemForIndexPath[indexPath];
+    UIColor *color = selected ? kColorTitleLabelSelected : kColorTitleLabelNormal;
+    item.textLabel.textColor = color;
 }
 
 - (CGRect)currentScrollVisibleRect
@@ -78,6 +119,15 @@ static const CGFloat kGapSide = 20;
     return visibleRect;
 }
 
+- (ZhiyueScrollSelectorItem *)defaultItem
+{
+    ZhiyueScrollSelectorItem *item = [[ZhiyueScrollSelectorItem alloc] init];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleItemTapped:)];
+    [item addGestureRecognizer:tap];
+    item.userInteractionEnabled = YES;
+    return item;
+}
+
 #pragma mark - Property
 
 - (void)setTitles:(NSArray *)titles
@@ -88,6 +138,8 @@ static const CGFloat kGapSide = 20;
 
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated
 {
+    _scrolledRect = [NSValue valueWithCGRect:rect];
+    
     rect.size = _scrollView.bounds.size;
     [_scrollView scrollRectToVisible:rect animated:animated];
 }
@@ -97,21 +149,26 @@ static const CGFloat kGapSide = 20;
 - (void)selectedTitleAtIndexPath:(NSIndexPath *)indexPath
 {
     _selectedIndexPath = indexPath;
-    [self setButtonSelected:YES withIndexPath:indexPath];
+    [self setItemSelected:YES withIndexPath:indexPath];
 }
 
 #pragma mark - Action
 
-- (void)titleButtonTapped:(UIButton *)sender
+- (void)titleItemTapped:(UITapGestureRecognizer *)sender
 {
-    [self setButtonSelected:NO withIndexPath:_selectedIndexPath];
-    _selectedIndexPath = [self indexPathForButton:sender];
-    [self setButtonSelected:YES withIndexPath:_selectedIndexPath];
+    [self setItemSelected:NO withIndexPath:_selectedIndexPath];
+    _selectedIndexPath = [self indexPathForItem:((ZhiyueScrollSelectorItem *)sender.view)];
+    [self setItemSelected:YES withIndexPath:_selectedIndexPath];
     
     if (_delegate)
     {
         [_delegate scrollSelector:self didSelectTitleAtIndexPath:_selectedIndexPath];
     }
+}
+
+- (void)didReceiveMemoryWarning:(NSNotification *)sender
+{
+    [_invisibleItems removeAllObjects];
 }
 
 #pragma mark - Lifecycle
@@ -122,10 +179,9 @@ static const CGFloat kGapSide = 20;
     if (self) {
         // Initialization code
         _rectForIndexPath = [[NSMutableDictionary alloc] init];
-        _buttonForIndexPath = [[NSMutableDictionary alloc] init];
+        _itemForIndexPath = [[NSMutableDictionary alloc] init];
         _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        _visibleIndexPaths = [[NSMutableSet alloc] init];
-        _invisibleIndexPaths = [[NSMutableSet alloc] init];
+        _invisibleItems = [[NSMutableSet alloc] init];
         
         // side shadow
         CGRect frame = CGRectZero;
@@ -161,6 +217,7 @@ static const CGFloat kGapSide = 20;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.clipsToBounds = NO;
+        _scrollView.scrollsToTop = NO;
         _scrollView.delegate = self;
         [self insertSubview:_scrollView belowSubview:_leftShadowView];
         
@@ -172,8 +229,15 @@ static const CGFloat kGapSide = 20;
         separator.backgroundColor = [UIColor darkGrayColor];
         separator.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:separator];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -189,9 +253,8 @@ static const CGFloat kGapSide = 20;
     NSUInteger count = [_titles count];
     [_scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_rectForIndexPath removeAllObjects];
-    [_buttonForIndexPath removeAllObjects];
-    [_visibleIndexPaths removeAllObjects];
-    [_invisibleIndexPaths removeAllObjects];
+    [_itemForIndexPath removeAllObjects];
+    [_invisibleItems removeAllObjects];
     
     CGFloat x = 0;
     for (int i = 0; i < count; i++)
@@ -210,18 +273,6 @@ static const CGFloat kGapSide = 20;
         _rectForIndexPath[indexPath] = value;
         
         x += frame.size.width + kGapBetweenItem;
-        
-        CGRect visibleRect = [self currentScrollVisibleRect];
-        NSLog(@"%@", NSStringFromCGRect(visibleRect));
-        if (CGRectIntersectsRect(visibleRect, frame))
-        {
-            [_visibleIndexPaths addObject:indexPath];
-        }
-        else
-        {
-            [_invisibleIndexPaths addObject:indexPath];
-        }
-        NSLog(@"vi: %u, in: %u", [_visibleIndexPaths count], [_invisibleIndexPaths count]);
     }
     
     x -= kGapBetweenItem;
@@ -232,33 +283,44 @@ static const CGFloat kGapSide = 20;
     {
         NSValue *rectValue = _rectForIndexPath[indexPath];
         CGRect frame = [rectValue CGRectValue];
-        UIButton *button = [[UIButton alloc] initWithFrame:frame];
-        button.backgroundColor = [UIColor clearColor];
-        button.titleLabel.font = kFontTitleLabel;
-        [button setTitle:_titles[indexPath.row] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-        [button setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-        [button addTarget:self action:@selector(titleButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        CGRect visibleRect = [self currentScrollVisibleRect];
+        if (CGRectIntersectsRect(visibleRect, frame))
+        {
+            ZhiyueScrollSelectorItem *item = [self defaultItem];
+            item.frame = frame;
+            item.textLabel.text = _titles[indexPath.row];
+            
+            [_scrollView addSubview:item];
+            _itemForIndexPath[indexPath] = item;
+        }
         
-        [_scrollView addSubview:button];
-        _buttonForIndexPath[indexPath] = button;
+        
     }
     
-    [self setButtonSelected:YES withIndexPath:_selectedIndexPath];
+    [self setItemSelected:YES withIndexPath:_selectedIndexPath];
+    [self scrollRectToVisible:[_scrolledRect CGRectValue] animated:NO];
+    _scrolledRect = nil;
 }
 
-- (void)enqueueObject:(NSIndexPath *)object
+#pragma mark - Reuse
+
+- (void)enqueueObject:(ZhiyueScrollSelectorItem *)object
 {
-    [_invisibleIndexPaths addObject:object];
-    [_visibleIndexPaths removeObject:object];
+    [_invisibleItems addObject:object];
+    
+    NSArray *allKeys = [_itemForIndexPath allKeysForObject:object];
+    NSAssert(1 == [allKeys count], @"More key-pairs is error!");
+    [_itemForIndexPath removeObjectsForKeys:allKeys];
 }
 
-- (NSIndexPath *)dequeueObject
+- (ZhiyueScrollSelectorItem *)dequeueObject
 {
-    NSIndexPath *indexPath = [_invisibleIndexPaths anyObject];
-    [_invisibleIndexPaths removeObject:indexPath];
-    return indexPath;
+    ZhiyueScrollSelectorItem *item = [_invisibleItems anyObject];
+    if (item)
+    {
+        [_invisibleItems removeObject:item];
+    }
+    return item;
 }
 
 /*
@@ -277,20 +339,38 @@ static const CGFloat kGapSide = 20;
     [self setShadowHiddenWithScrollView:scrollView];
     
     CGRect visibleRect = [self currentScrollVisibleRect];
-    NSLog(@"%@", NSStringFromCGRect(visibleRect));
     for (NSIndexPath *indexPath in _rectForIndexPath)
     {
         NSValue *value = _rectForIndexPath[indexPath];
+        ZhiyueScrollSelectorItem *item = _itemForIndexPath[indexPath];
         if (CGRectIntersectsRect(visibleRect, [value CGRectValue]))
         {
-            [_visibleIndexPaths addObject:[self dequeueObject]];
+            if (!item)
+            {
+                ZhiyueScrollSelectorItem *dequeueItem = [self dequeueObject];
+                if (!dequeueItem)
+                {
+                    dequeueItem = [self defaultItem];
+                    [_scrollView addSubview:dequeueItem];
+                }
+                
+                dequeueItem.frame = [value CGRectValue];
+                dequeueItem.textLabel.text = _titles[indexPath.row];
+                dequeueItem.textLabel.textColor = [_selectedIndexPath isEqual:indexPath] ? kColorTitleLabelSelected : kColorTitleLabelNormal;
+                
+                _itemForIndexPath[indexPath] = dequeueItem;
+            }
         }
         else
         {
-            [self enqueueObject:indexPath];
+            if (item)
+            {
+                [self enqueueObject:item];
+            }
         }
     }
-    NSLog(@"vi: %u, in: %u", [_visibleIndexPaths count], [_invisibleIndexPaths count]);
+    
+    NSLog(@"visibles: %u, invisibles: %u, subviews: %u", [_itemForIndexPath count], [_invisibleItems count], [[_scrollView subviews] count]);
 }
 
 @end
