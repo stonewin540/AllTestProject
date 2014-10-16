@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		8EF49CF519EFC564009A2EB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49CF419EFC564009A2EB2 /* main.m */; };
 		8EF49CF819EFC564009A2EB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49CF719EFC564009A2EB2 /* AppDelegate.m */; };
-		8EF49CFB19EFC564009A2EB2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49CFA19EFC564009A2EB2 /* ViewController.m */; };
-		8EF49CFE19EFC564009A2EB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF49CFC19EFC564009A2EB2 /* Main.storyboard */; };
 		8EF49D0019EFC564009A2EB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EF49CFF19EFC564009A2EB2 /* Images.xcassets */; };
-		8EF49D0319EFC564009A2EB2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF49D0119EFC564009A2EB2 /* LaunchScreen.xib */; };
 		8EF49D0F19EFC564009A2EB2 /* AutoLayoutTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49D0E19EFC564009A2EB2 /* AutoLayoutTestTests.m */; };
+		8EF49D1A19EFCAC8009A2EB2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49D1919EFCAC8009A2EB2 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +30,12 @@
 		8EF49CF419EFC564009A2EB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8EF49CF619EFC564009A2EB2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8EF49CF719EFC564009A2EB2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8EF49CF919EFC564009A2EB2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8EF49CFA19EFC564009A2EB2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		8EF49CFD19EFC564009A2EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8EF49CFF19EFC564009A2EB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8EF49D0219EFC564009A2EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8EF49D0819EFC564009A2EB2 /* AutoLayoutTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoLayoutTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF49D0D19EFC564009A2EB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EF49D0E19EFC564009A2EB2 /* AutoLayoutTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTestTests.m; sourceTree = "<group>"; };
+		8EF49D1819EFCAC8009A2EB2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8EF49D1919EFCAC8009A2EB2 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +79,9 @@
 			children = (
 				8EF49CF619EFC564009A2EB2 /* AppDelegate.h */,
 				8EF49CF719EFC564009A2EB2 /* AppDelegate.m */,
-				8EF49CF919EFC564009A2EB2 /* ViewController.h */,
-				8EF49CFA19EFC564009A2EB2 /* ViewController.m */,
-				8EF49CFC19EFC564009A2EB2 /* Main.storyboard */,
+				8EF49D1819EFCAC8009A2EB2 /* ViewController.h */,
+				8EF49D1919EFCAC8009A2EB2 /* ViewController.m */,
 				8EF49CFF19EFC564009A2EB2 /* Images.xcassets */,
-				8EF49D0119EFC564009A2EB2 /* LaunchScreen.xib */,
 				8EF49CF219EFC564009A2EB2 /* Supporting Files */,
 			);
 			path = AutoLayoutTest;
@@ -199,8 +193,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF49CFE19EFC564009A2EB2 /* Main.storyboard in Resources */,
-				8EF49D0319EFC564009A2EB2 /* LaunchScreen.xib in Resources */,
 				8EF49D0019EFC564009A2EB2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF49CFB19EFC564009A2EB2 /* ViewController.m in Sources */,
+				8EF49D1A19EFCAC8009A2EB2 /* ViewController.m in Sources */,
 				8EF49CF819EFC564009A2EB2 /* AppDelegate.m in Sources */,
 				8EF49CF519EFC564009A2EB2 /* main.m in Sources */,
 			);
@@ -242,25 +234,6 @@
 			targetProxy = 8EF49D0919EFC564009A2EB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8EF49CFC19EFC564009A2EB2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8EF49CFD19EFC564009A2EB2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8EF49D0119EFC564009A2EB2 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8EF49D0219EFC564009A2EB2 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8EF49D1019EFC564009A2EB2 /* Debug */ = {
@@ -412,6 +385,7 @@
 				8EF49D1419EFC564009A2EB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8EF49D1519EFC564009A2EB2 /* Build configuration list for PBXNativeTarget "AutoLayoutTestTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +394,7 @@
 				8EF49D1719EFC564009A2EB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
