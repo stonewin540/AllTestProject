@@ -1,0 +1,312 @@
+{\rtf1\ansi\ansicpg936\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red109\green109\blue109;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14400\viewh11400\viewkind0
+\deftab720
+\pard\pardeftab720\sa260
+
+\f0\fs26 \cf0 In this article, you will learn how to communicate with a server using TCP/IP.\
+\
+\pard\pardeftab720
+
+\b\fs28 \cf0 Using Streams for Network Communications\
+\pard\pardeftab720\sa260
+
+\b0\fs26 \cf0 The easiest way to communicate over the network using sockets is to use the NSStream class. The NSStream class is an abstract class representing streams, where you can use it to read and write data. It can be used on memory, files, or networks. Using the NSStream class, you can communicate with a server simply by writing data to it and receive data from it by reading from an NSStream object.\
+On the Mac OS X, you can establish a connection to a server via the use of an NSHost and NSStream objects, like this:
+\f1\fs24 \
+NSInputStream *iStream;\
+NSOutputStream *oStream;\
+uint portNo = 500;\
+NSURL *website = [NSURL URLWithString:urlStr];\
+NSHost *host = [NSHost hostWithName:[website host]];\
+[NSStream getStreamsToHost:host\
+port:portNo\
+inputStream:&iStream\
+outputStream:&oStream];\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 As you observed, the NSStream class has a class method named 
+\f1 getStreamsToHost:port:inputStream:outputStream:
+\f0 , which creates an input stream and an output stream to a server where you can read and write data to it. However, the problem is that the 
+\f1 getStreamsToHost:port:inputStream:outputStream:
+\f0  method is not supported on the iPhone OS. Hence, the above code will not work in your iPhone application.\
+To resolve this problem, you can add a category to the existing NSStream class to replace the functionality provided by the 
+\f1 getStreamsToHost:port:inputStream:outputStream: 
+\f0 method. To do so, right-click on the Classes group in Xcode and add a new file and name it as 
+\f1 NSStreamAdditions.m
+\f0 . In the 
+\f1 NSStreamAdditions.h
+\f0  file, add in the following:
+\f1\fs24 \
+#import \
+@interface NSStream (MyAdditions)\
++ (void)getStreamsToHostNamed:(NSString *)hostName\
+port:(NSInteger)port\
+inputStream:(NSInputStream **)inputStreamPtr\
+outputStream:(NSOutputStream **)outputStreamPtr;\
+@end\
+\
+\
+
+\f0\fs26 In the 
+\f1 NSStreamAdditions.m
+\f0  file, add in the following :\
+
+\f1\fs24 \
+\
+#import "NSStreamAdditions.h"\
+@implementation NSStream (MyAdditions)\
++ (void)getStreamsToHostNamed:(NSString *)hostName\
+port:(NSInteger)port\
+inputStream:(NSInputStream **)inputStreamPtr\
+outputStream:(NSOutputStream **)outputStreamPtr\
+\{\
+CFReadStreamRef readStream;\
+CFWriteStreamRef writeStream;\
+assert(hostName != nil);\
+assert( (port > 0) && (port < 65536) );\
+assert( (inputStreamPtr != NULL) || (outputStreamPtr != NULL) );\
+readStream = NULL;\
+writeStream = NULL;\
+CFStreamCreatePairWithSocketToHost(\
+NULL,\
+(CFStringRef) hostName,\
+port,\
+((inputStreamPtr != nil) ? &readStream : NULL),\
+((outputStreamPtr != nil) ? &writeStream : NULL)\
+);\
+if (inputStreamPtr != NULL) \{\
+*inputStreamPtr = [NSMakeCollectable(readStream) autorelease];\
+\}\
+if (outputStreamPtr != NULL) \{\
+*outputStreamPtr = [NSMakeCollectable(writeStream) autorelease];\
+\}\
+\}\
+@end\
+\
+\pard\pardeftab720\sa260
+
+\f0\fs26 \cf0 The above code adds the class method named 
+\f1 getStreamsToHostNamed:port:inputStream:outputStream:
+\f0  to the NSStream class. You can now use this method in your iPhone application to connect to a server using TCP.\
+\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trcbpat1 \trwWidth14020\trftsWidth3 \trbrdrt\brdrs\brdrw20\brdrcf2 \trbrdrl\brdrs\brdrw20\brdrcf2 \trbrdrb\brdrs\brdrw20\brdrcf2 \trbrdrr\brdrs\brdrw20\brdrcf2 
+\clvertalc \clshdrawnil \clwWidth13780\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt60 \clpadl60 \clpadb60 \clpadr60 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720
+
+\b\fs28 \cf0 Author's Note:
+\b0  The code for the category outlined here are based on Apple\'92s Technical Q&A1652.\cell \lastrow\row
+\pard\pardeftab720\sa260
+
+\fs26 \cf0 In the 
+\f1 NetworkViewController.m
+\f0  file, insert the following statements in bold:
+\f1\fs24 \
+#import "NetworkViewController.h"\
+#import "NSStreamAdditions.h"\
+@implementation NetworkViewController\
+NSMutableData *data;\
+NSInputStream *iStream;\
+NSOutputStream *oStream;\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 Define the 
+\f1 connectToServerUsingStream:portNo:
+\f0  method so that you can connect to a server and then create an input and output stream objects:
+\f1\fs24 \
+-(void) connectToServerUsingStream:(NSString *)urlStr\
+portNo: (uint) portNo \{\
+if (![urlStr isEqualToString:@""]) \{\
+NSURL *website = [NSURL URLWithString:urlStr];\
+if (!website) \{\
+NSLog(@"%@ is not a valid URL");\
+return;\
+\} else \{\
+[NSStream getStreamsToHostNamed:urlStr\
+port:portNo\
+inputStream:&iStream\
+outputStream:&oStream];\
+[iStream retain];\
+[oStream retain];\
+[iStream setDelegate:self];\
+[oStream setDelegate:self];\
+[iStream scheduleInRunLoop:[NSRunLoop currentRunLoop]\
+forMode:NSDefaultRunLoopMode];\
+[oStream scheduleInRunLoop:[NSRunLoop currentRunLoop]\
+forMode:NSDefaultRunLoopMode];\
+[oStream open];\
+[iStream open];\
+\}\
+\}\
+\}\
+
+\f0\fs26 You scheduled both the input and output streams to receive events on a run loop. Doing so prevents your code from blocking when there is no data available on the stream. The delegates for both stream objects are also set to self as you will implement the method for receiving data on the stream in this same class.\
+\
+\pard\pardeftab720
+
+\b\fs28 \cf0 Using CFNetwork for Network Communication\
+\pard\pardeftab720\sa260
+
+\b0\fs26 \cf0 Another way to establish a connection to a server using TCP is through the CFNetwork framework. The CFNetwork is a framework in the Core Services Framework (C libraries), which provides abstractions for network protocols, such as HTTP, FTP, and BSD sockets.\
+To see how to use the various classes in the CFNetwork framework, add the following statements in bold to the 
+\f1 NetworkViewController.m
+\f0  file:
+\f1\fs24 \
+#import "NetworkViewController.h"\
+#import "NSStreamAdditions.h"\
+#import \
+@implementation NetworkViewController\
+NSMutableData *data;\
+NSInputStream *iStream;\
+NSOutputStream *oStream;\
+CFReadStreamRef readStream = NULL;\
+CFWriteStreamRef writeStream = NULL;\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 Define the following 
+\f1 connectToServerUsingCFStream:portNo:
+\f0  method as follows:\
+\
+
+\f1\fs24 -(void) connectToServerUsingCFStream:(NSString *) urlStr portNo: (uint) portNo \{\
+CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,\
+(CFStringRef) urlStr,\
+portNo,\
+&readStream,\
+&writeStream);\
+if (readStream && writeStream) \{\
+CFReadStreamSetProperty(readStream,\
+kCFStreamPropertyShouldCloseNativeSocket,\
+kCFBooleanTrue);\
+CFWriteStreamSetProperty(writeStream,\
+kCFStreamPropertyShouldCloseNativeSocket,\
+kCFBooleanTrue);\
+iStream = (NSInputStream *)readStream;\
+[iStream retain];\
+[iStream setDelegate:self];\
+[iStream scheduleInRunLoop:[NSRunLoop currentRunLoop]\
+forMode:NSDefaultRunLoopMode];\
+[iStream open];\
+oStream = (NSOutputStream *)writeStream;\
+[oStream retain];\
+[oStream setDelegate:self];\
+[oStream scheduleInRunLoop:[NSRunLoop currentRunLoop]\
+forMode:NSDefaultRunLoopMode];\
+[oStream open];\
+\}\
+\
+\pard\pardeftab720\sa260
+
+\f0\fs26 \cf0 You first use the 
+\f1 CFStreamCreatePairWithSocketToHost()
+\f0  method to create a readable and writable stream connected to a server via TCP/IP. This method returns a reference to a readable stream (readStream) and a writable stream (writeStream). They are then type-casted to their respective equivalent in Objective C -- NSInputStream and NSOutputStream. You then do the same as you did previously -- set their delegates as well as their run loop.\
+\
+\pard\pardeftab720
+
+\b\fs28 \cf0 Sending Data\
+\pard\pardeftab720\sa260
+
+\b0\fs26 \cf0 To send data to a server, you simply use the NSOutputStream object, like this:
+\f1\fs24 \
+-(void) writeToServer:(const uint8_t *) buf \{\
+[oStream write:buf maxLength:strlen((char*)buf)];\
+\}\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 The above method writes an array of unsigned integer bytes to the server.\
+\
+\
+\pard\pardeftab720
+
+\b\fs28 \cf0 Reading Data\
+\pard\pardeftab720\sa260
+
+\b0\fs26 \cf0 When data are received from the server, the 
+\f1 stream:handleEvent:
+\f0  method will be fired. Hence, you will read all incoming data in this method. Implement this method as shown below:
+\f1\fs24 \
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode \{\
+switch(eventCode) \{\
+case NSStreamEventHasBytesAvailable:\
+\{\
+if (data == nil) \{\
+data = [[NSMutableData alloc] init];\
+\}\
+uint8_t buf[1024];\
+unsigned int len = 0;\
+len = [(NSInputStream *)stream read:buf maxLength:1024];\
+if(len) \{\
+[data appendBytes:(const void *)buf length:len];\
+int bytesRead;\
+bytesRead += len;\
+\} else \{\
+NSLog(@"No data.");\
+\}\
+NSString *str = [[NSString alloc] initWithData:data\
+encoding:NSUTF8StringEncoding];\
+NSLog(str);\
+UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From server"\
+message:str\
+delegate:self\
+cancelButtonTitle:@"OK"\
+otherButtonTitles:nil];\
+[alert show];\
+[alert release];\
+[str release];\
+[data release];\
+data = nil;\
+\} break;\
+\}\
+\}\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 This method contains two parameters -- an NSStream instance, and an NSStreamEvent constant. The NSStreamEvent constant can be one of the following:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf0 {\listtext	\'95	}NSStreamEventNone -- No event has occurred. \
+{\listtext	\'95	}NSStreamEventOpenCompleted -- The open has completed successfully. \
+{\listtext	\'95	}NSStreamEventHasBytesAvailable -- The stream has bytes to be read. \
+{\listtext	\'95	}NSStreamEventHasSpaceAvailable -- The stream can accept bytes for writing. \
+{\listtext	\'95	}NSStreamEventErrorOccurred -- An error has occurred on the stream. \
+{\listtext	\'95	}NSStreamEventEndEncountered -- The end of the stream has been reached.\
+\pard\pardeftab720
+\cf0 For reading incoming data, you would check for the NSStreamEventHasBytesAvailable constant. What you did in this method was to read from the incoming stream and then display the received data using an UIAlertView object.\
+The 
+\f1 stream:handleEvent:
+\f0  method is also a good place to check for connection error. For example, if the 
+\f1 connectToServerUsingStream:portNo:
+\f0  method fails to connect to the server, the error will be notified via the 
+\f1 stream:handleEvent:
+\f0  method, with the NSStreamEvent constant set to NSStreamEventErrorOccurred.
+\f1\fs24 \
+\}\
+\
+\pard\pardeftab720
+
+\f0\b\fs28 \cf0 Disconnecting\
+\pard\pardeftab720\sa260
+
+\b0\fs26 \cf0 To disconnect from the server, define the disconnect method as shown below:
+\f1\fs24 \
+-(void) disconnect \{\
+[iStream close];\
+[oStream close];\
+\}\
+\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 Also, add in the following lines in bold to the 
+\f1 dealloc
+\f0  method:
+\f1\fs24 \
+- (void)dealloc \{\
+[self disconnect];\
+[iStream release];\
+[oStream release];\
+if (readStream) CFRelease(readStream);\
+if (writeStream) CFRelease(writeStream);\
+[super dealloc];\
+\}}
