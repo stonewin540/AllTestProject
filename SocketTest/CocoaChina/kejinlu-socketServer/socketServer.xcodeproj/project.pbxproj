@@ -1,0 +1,238 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A380827014CAD61D00C23B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A380826F14CAD61D00C23B9A /* main.m */; };
+		A380827214CAD61D00C23B9A /* socketServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = A380827114CAD61D00C23B9A /* socketServer.1 */; };
+		A38B8CB014D016BC00CB4AB6 /* ChatServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B8CAF14D016BC00CB4AB6 /* ChatServer.m */; };
+		A38B8CBF14D02E1400CB4AB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38B8CBE14D02E1400CB4AB6 /* Cocoa.framework */; };
+		A38B8CC114D02E2600CB4AB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38B8CC014D02E2600CB4AB6 /* Foundation.framework */; };
+		A38B8CC314D02E4D00CB4AB6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38B8CC214D02E4D00CB4AB6 /* CoreFoundation.framework */; };
+		A38B8CC914D02F1400CB4AB6 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38B8CC814D02F1400CB4AB6 /* AppKit.framework */; };
+		A38B8CED14D0380600CB4AB6 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B8CEC14D0380600CB4AB6 /* Client.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A380826914CAD61D00C23B9A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				A380827214CAD61D00C23B9A /* socketServer.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A380826B14CAD61D00C23B9A /* socketServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = socketServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		A380826F14CAD61D00C23B9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A380827114CAD61D00C23B9A /* socketServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = socketServer.1; sourceTree = "<group>"; };
+		A38B8CAE14D016BC00CB4AB6 /* ChatServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatServer.h; sourceTree = "<group>"; };
+		A38B8CAF14D016BC00CB4AB6 /* ChatServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatServer.m; sourceTree = "<group>"; };
+		A38B8CBE14D02E1400CB4AB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A38B8CC014D02E2600CB4AB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A38B8CC214D02E4D00CB4AB6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		A38B8CC814D02F1400CB4AB6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A38B8CEB14D0380600CB4AB6 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		A38B8CEC14D0380600CB4AB6 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A380826814CAD61D00C23B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A38B8CC914D02F1400CB4AB6 /* AppKit.framework in Frameworks */,
+				A38B8CC314D02E4D00CB4AB6 /* CoreFoundation.framework in Frameworks */,
+				A38B8CC114D02E2600CB4AB6 /* Foundation.framework in Frameworks */,
+				A38B8CBF14D02E1400CB4AB6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A380826014CAD61D00C23B9A = {
+			isa = PBXGroup;
+			children = (
+				A38B8CC814D02F1400CB4AB6 /* AppKit.framework */,
+				A38B8CC214D02E4D00CB4AB6 /* CoreFoundation.framework */,
+				A38B8CC014D02E2600CB4AB6 /* Foundation.framework */,
+				A38B8CBE14D02E1400CB4AB6 /* Cocoa.framework */,
+				A380826E14CAD61D00C23B9A /* socketServer */,
+				A380826C14CAD61D00C23B9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A380826C14CAD61D00C23B9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A380826B14CAD61D00C23B9A /* socketServer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A380826E14CAD61D00C23B9A /* socketServer */ = {
+			isa = PBXGroup;
+			children = (
+				A380826F14CAD61D00C23B9A /* main.m */,
+				A380827114CAD61D00C23B9A /* socketServer.1 */,
+				A38B8CAE14D016BC00CB4AB6 /* ChatServer.h */,
+				A38B8CAF14D016BC00CB4AB6 /* ChatServer.m */,
+				A38B8CEB14D0380600CB4AB6 /* Client.h */,
+				A38B8CEC14D0380600CB4AB6 /* Client.m */,
+			);
+			path = socketServer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A380826A14CAD61D00C23B9A /* socketServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A380827514CAD61D00C23B9A /* Build configuration list for PBXNativeTarget "socketServer" */;
+			buildPhases = (
+				A380826714CAD61D00C23B9A /* Sources */,
+				A380826814CAD61D00C23B9A /* Frameworks */,
+				A380826914CAD61D00C23B9A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = socketServer;
+			productName = socketServer;
+			productReference = A380826B14CAD61D00C23B9A /* socketServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A380826214CAD61D00C23B9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = Taobao.com;
+			};
+			buildConfigurationList = A380826514CAD61D00C23B9A /* Build configuration list for PBXProject "socketServer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A380826014CAD61D00C23B9A;
+			productRefGroup = A380826C14CAD61D00C23B9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A380826A14CAD61D00C23B9A /* socketServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A380826714CAD61D00C23B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A380827014CAD61D00C23B9A /* main.m in Sources */,
+				A38B8CB014D016BC00CB4AB6 /* ChatServer.m in Sources */,
+				A38B8CED14D0380600CB4AB6 /* Client.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A380827314CAD61D00C23B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		A380827414CAD61D00C23B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		A380827614CAD61D00C23B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A380827714CAD61D00C23B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A380826514CAD61D00C23B9A /* Build configuration list for PBXProject "socketServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A380827314CAD61D00C23B9A /* Debug */,
+				A380827414CAD61D00C23B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A380827514CAD61D00C23B9A /* Build configuration list for PBXNativeTarget "socketServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A380827614CAD61D00C23B9A /* Debug */,
+				A380827714CAD61D00C23B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A380826214CAD61D00C23B9A /* Project object */;
+}
