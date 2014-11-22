@@ -19,6 +19,7 @@
 		8E9E831918EEEBF5009BE18E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9E830118EEEBF5009BE18E /* UIKit.framework */; };
 		8E9E832118EEEBF5009BE18E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E831F18EEEBF5009BE18E /* InfoPlist.strings */; };
 		8E9E832318EEEBF5009BE18E /* AutomationTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E832218EEEBF5009BE18E /* AutomationTestTests.m */; };
+		8E9E832E18EEEC80009BE18E /* ATViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E832D18EEEC80009BE18E /* ATViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		8E9E831E18EEEBF5009BE18E /* AutomationTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutomationTestTests-Info.plist"; sourceTree = "<group>"; };
 		8E9E832018EEEBF5009BE18E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E9E832218EEEBF5009BE18E /* AutomationTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutomationTestTests.m; sourceTree = "<group>"; };
+		8E9E832C18EEEC80009BE18E /* ATViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATViewController.h; sourceTree = "<group>"; };
+		8E9E832D18EEEC80009BE18E /* ATViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 		8E9E830318EEEBF5009BE18E /* AutomationTest */ = {
 			isa = PBXGroup;
 			children = (
+				8E9E832C18EEEC80009BE18E /* ATViewController.h */,
+				8E9E832D18EEEC80009BE18E /* ATViewController.m */,
 				8E9E830C18EEEBF5009BE18E /* ATAppDelegate.h */,
 				8E9E830D18EEEBF5009BE18E /* ATAppDelegate.m */,
 				8E9E830F18EEEBF5009BE18E /* Images.xcassets */,
@@ -241,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9E830A18EEEBF5009BE18E /* main.m in Sources */,
+				8E9E832E18EEEC80009BE18E /* ATViewController.m in Sources */,
 				8E9E830E18EEEBF5009BE18E /* ATAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
