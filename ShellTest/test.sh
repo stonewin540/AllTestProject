@@ -13,14 +13,27 @@ DURATION_SLEEP=0.7
 
 HTML_TEMP_FILE=./HTML.tmp
 DNS_TEMP_FILE=./DNS.tmp
+AVERAGE_TEMP_FILE=./AVERAGE.tmp
 
 # 第二个参数是pattern；第一个参数是HTML文本；第三个参数是存储文件
-function parse_with_html_pattern_to_file () {
+function parse_with_html_pattern_to_file() {
 	egrep -o $2 $1 > $3
 }
 
 function download_with_address_to_file() {
 	curl $1 > $2
+}
+
+function ping_IP_with_file_to_file() {
+    rm $2
+
+    for ip in `cat $1`
+        do
+        time=$(ping -c 5 $ip)
+        average=$(echo $time | grep -o --color 'stddev.*/' | egrep -o --color '/.*?/' | egrep -o --color '\d+.+\d+')
+        echo $average
+        echo $average >> $2
+    done
 }
 
 # download DNS HTML
@@ -33,7 +46,9 @@ download_with_address_to_file $HTML_ADDRESS $HTML_TEMP_FILE
 parse_with_html_pattern_to_file $HTML_TEMP_FILE "((\d{1,3}\.){3})(\d{1,3})" $DNS_TEMP_FILE
 echo parsing HTML...
 sleep $DURATION_SLEEP
-cat -n $DNS_TEMP_FILE
+#cat -n $DNS_TEMP_FILE
+
+ping_IP_with_file_to_file $DNS_TEMP_FILE $AVERAGE_TEMP_FILE
 
 # cleanup TMP
 rm $HTML_TEMP_FILE
